@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Todo List</h1>
+
+    <form id="add-form">
+        <label for="new_todo">New Todo:</label>
+        <input type="text" id="new_todo" name="new_todo" required>
+        <br>
+        <label for="new_description">Description:</label>
+        <textarea id="new_description" name="new_description" rows="4" required></textarea>
+        <br>
+        <button type="button" onclick="addTodo()">Add</button>
+    </form>
+
+    <ul id="todo-list">
+        {% for todo in todo_list %}
+        <li class='todos {{ todo.status.lower().replace(' ', '-') }}' id="todo-{{ loop.index0 }}">
+            <div class="col">
+                <div class="row"><strong>{{ todo['todo'] }}</strong> - {{ todo['description'] }} (Status: <span
+                        id="status-{{ loop.index0 }}">{{ todo['status'] }}</span>)</div>
+                <div class="row">
+                    <button onclick="updateStatus('{{ todo['_id'] }}', 'In Progress')" {% if todo['status']=='Done' %}
+                        disabled {% endif %}>Start</button>
+                    <button onclick="updateStatus('{{ todo['_id'] }}', 'Testing')" {% if todo['status'] !='In Progress'
+                        %} disabled {% endif %}>Testing</button>
+                    <button onclick="updateStatus('{{ todo['_id'] }}', 'Done')" {% if todo['status'] !='Testing' %}
+                        disabled {% endif %}>Complete</button>
+                    <button onclick="deleteTodo('{{ todo['_id'] }}')">Delete</button>
+                </div>
+            </div>
+        </li>
+
+        {% endfor %}
+    </ul>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>

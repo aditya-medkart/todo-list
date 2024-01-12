@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: large;
+}
+
+h1 {
+    color: #020202;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.todos {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid hsl(0, 0%, 0%);
+    border-radius: 5px;
+}
+
+.pending {
+    background-color: rgb(245, 43, 43);
+}
+
+.in-progress {
+    background-color: rgb(243, 243, 110);
+}
+
+.testing {
+    background-color: rgb(59, 59, 248);
+}
+
+.done {
+    background-color: rgb(38, 168, 38); 
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+li div {
+    margin-top: 5px;
+}
+
+button {
+    border-radius: 10px;
+    font-weight: bold;
+    margin-right: 1rem;
+    padding: 10px;
+    width: 5rem;
+    height: auto;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
