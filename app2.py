@@ -20,18 +20,19 @@ async def index(request: Request):
 async def add_todo(request: Request, new_todo: str = Form(...), new_description: str = Form(...)):
     new_task = {'todo': new_todo, 'description': new_description, 'status': 'Pending'}
     collection.insert_one(new_task)
-    return {"message": "Todo added successfully"}
+    return {"message": "Todo Task is added successfully"}
 
 @app.get('/update_status/{todo_id}/{status}')
 async def update_status(todo_id: str, status: str):
+
     valid_statuses = ['Pending', 'In Progress', 'Testing', 'Done']
     if status not in valid_statuses:
         raise HTTPException(status_code=400, detail="Invalid status")
     
     collection.update_one({'_id': ObjectId(todo_id)}, {'$set': {'status': status}})
-    return {"message": "Status updated successfully"}
+    return {"message": "Status od todo updated successfully"}
 
 @app.get('/delete/{todo_id}')
 async def delete_todo(todo_id: str):
-    collection.delete_one({'_id': ObjectId(todo_id)})
+    collection.delete_one({'_id': ObjectId(todo_id)}) 
     return {"message": "Todo deleted successfully"}
