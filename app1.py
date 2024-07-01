@@ -23,7 +23,7 @@ def add_todo():
 
 @app.route('/update_status/<ObjectId:_id>/<status>')
 def update_status(_id, status):
-    valid_statuses = ['Pending', 'In Progress', 'Testing', 'Done']
+    valid_statuses = ['Pending', 'In set Progress', 'Testing', 'Done']
     if status in valid_statuses:
         collection.update_one({'_id': _id}, {'$set': {'status': status}})
     return redirect(url_for('index')) 
